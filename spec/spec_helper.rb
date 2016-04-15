@@ -5,3 +5,5 @@ include RspecPuppetFacts
 RSpec.configure do |config|
   config.formatter = :documentation
 end
+
+at_exit { RSpec::Puppet::Coverage.report! }

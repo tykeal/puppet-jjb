@@ -1,48 +1,57 @@
 # Class: jjb
 # ===========================
 #
-# Full description of class jjb here.
-#
-# Parameters
-# ----------
-#
-# Document parameters here.
-#
-# * `sample parameter`
-# Explanation of what this parameter affects and what it defaults to.
-# e.g. "Specify one or more upstream ntp servers as an array."
-#
-# Variables
-# ----------
-#
-# Here you should define a list of variables that this module would require.
-#
-# * `sample variable`
-#  Explanation of how this variable affects the function of this class and if
-#  it has a default. e.g. "The parameter enc_ntp_servers must be set by the
-#  External Node Classifier as a comma separated list of hostnames." (Note,
-#  global variables should be avoided in favor of class parameters as
-#  of Puppet 2.6.)
-#
-# Examples
-# --------
-#
-# @example
-#    class { 'jjb':
-#      servers => [ 'pool.ntp.org', 'ntp.local.company.com' ],
-#    }
+# Install and manage Jenkins Job Builder (JJB)
 #
 # Authors
 # -------
 #
-# Author Name <author@domain.com>
+# Andrew Grimberg <agrimberg@linuxfoundation.org>
 #
 # Copyright
 # ---------
 #
-# Copyright 2016 Your name here, unless otherwise noted.
+# Copyright 2016 Andrew Grimberg
 #
-class jjb {
+# License
+# -------
+#
+# Apache-2.0 <http://spdx.org/licenses/Apache-2.0>
+#
+# @param system_install Should JJB be installed systemwide or into a virtualenv.
+#   True (default) == install systemwide
+#   False == install into a virtualenv
+#
+# @example
+#   include jjb
+#
+class jjb (
+  Hash $config            = {},
+  String $ini_dir         = $jjb::params::ini_dir,
+  String $ini_file        = $jjb::params::ini_file,
+  String $ini_owner       = $jjb::params::ini_owner,
+  String $ini_group       = $jjb::params::ini_group,
+  Boolean $manage_ini_dir = $jjb::params::manage_ini_dir,
+  Boolean $system_install = $jjb::params::system_install
+) inherits jjb::params {
+  anchor { 'jjb::begin': }
+  anchor { 'jjb::end': }
 
+  class { 'jjb::install':
+    system_install => $system_install,
+  }
 
+  class { 'jjb::config':
+    config         => $config,
+    ini_dir        => $ini_dir,
+    ini_file       => $ini_file,
+    ini_owner      => $ini_owner,
+    ini_group      => $ini_group,
+    manage_ini_dir => $manage_ini_dir,
+  }
+
+  Anchor['jjb::begin'] ->
+    Class['jjb::install'] ->
+    Class['jjb::config'] ->
+  Anchor['jjb::end']
 }
