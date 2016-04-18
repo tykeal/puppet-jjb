@@ -18,6 +18,18 @@
 #
 # Apache-2.0 <http://spdx.org/licenses/Apache-2.0>
 #
+# @param config Configuration hash
+#
+# @param ini_dir Fully qualified path to where the ini configuration should live
+#
+# @param ini_file Fully qualified name of the ini configuration file
+#
+# @param ini_owner Owner of the ini configuration file
+#
+# @param ini_group Group owner of the ini configuration file
+#
+# @param manage_ini_dir If the ini_dir should be managed or not
+#
 class jjb::config (
   Hash $config,
   String $ini_dir,

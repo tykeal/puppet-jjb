@@ -40,6 +40,29 @@ describe 'jjb::config' do
         :group  => params['ini_group'],
       ) }
 
+      it 'should have a merged config' do
+        params.merge!({
+          'config'          => {
+            'extra_section' => {
+              'testoption'  => 'testvalue',
+            },
+          },
+        })
+
+        is_expected.to contain_ini_config(params['ini_file']).with(
+          :config        => {
+            'jenkins'    => {
+              'user'     => 'jobbuilder',
+              'password' => 'YOU_NEED_TO_SET_ME!',
+              'url'      => 'https://localhost:8080',
+            },
+            'extra_section' => {
+              'testoption'  => 'testvalue',
+            },
+          },
+        )
+      end
+
       it 'should not have an ini_dir if manage_ini_dir is false' do
         params.merge!({'manage_ini_dir' => false})
         is_expected.to_not contain_file(params['ini_dir'])
