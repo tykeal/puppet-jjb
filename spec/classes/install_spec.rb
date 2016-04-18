@@ -23,12 +23,12 @@ describe 'jjb::install' do
       it { should contain_class('jjb::install') }
 
       # venv installation
-      it { should contain_class('jjb::install::venv') }
+      it { should contain_class('jjb::install::pip') }
       it { should_not contain_class('jjb::install::vcs') }
 
       it "should install into venv via vcs if install-type is 'venv' and install_via_source is true" do
         params.merge!({'install_via_source' => true})
-        is_expected.to contain_class('jjb::install::venv').that_requires(
+        is_expected.to contain_class('jjb::install::pip').that_requires(
           'Class[jjb::install::vcs]'
         )
         is_expected.to contain_class('jjb::install::vcs')
@@ -37,7 +37,7 @@ describe 'jjb::install' do
       # system installation
       it "should install globally if install_type is 'system'" do
         params.merge!({'install_type' => 'system'})
-        is_expected.to contain_class('jjb::install::system')
+        is_expected.to contain_class('jjb::install::pip')
       end
 
       it "should install globaly via vcs if install_type is 'system' and install_via_source is true" do
@@ -45,7 +45,7 @@ describe 'jjb::install' do
           'install_type'       => 'system',
           'install_via_source' => true,
         })
-        is_expected.to contain_class('jjb::install::system').that_requires(
+        is_expected.to contain_class('jjb::install::pip').that_requires(
           'Class[jjb::install::vcs]'
         )
         is_expected.to contain_class('jjb::install::vcs')

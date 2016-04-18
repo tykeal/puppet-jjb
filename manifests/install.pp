@@ -49,42 +49,25 @@ class jjb::install (
           $vcs_info,
   Pattern['^\/'] $venv_path,
 ) {
-  if ($install_type != 'package' and $install_via_source) {
-    class { 'jjb::install::vcs':
-      vcs_info => $vcs_info,
+  unless ($install_type == 'package') {
+    class { 'jjb::install::pip':
+      install_type       => $install_type,
+      install_via_source => $install_via_source,
+      package_name       => $package_name,
+      package_version    => $package_version,
+      vcs_path           => $vcs_info['vcs_path'],
+      venv_path          => $venv_path,
     }
-  }
-
-  case $install_type {
-    'package': {
-      class { 'jjb::install::package':
-        package_name    => $package_name,
-        package_version => $package_version,
-      }
-    }
-    'system': {
-      class { 'jjb::install::system':
-        install_via_source => $install_via_source,
-        package_version    => $package_version,
-        vcs_path           => $vcs_info['vcs_path'],
-      }
-      if ($install_via_source) {
-        Class['jjb::install::vcs'] ->
-        Class['jjb::install::system']
+    if ($install_via_source) {
+      class { 'jjb::install::vcs':
+        vcs_info => $vcs_info,
+        before   => Class['jjb::install::pip'],
       }
     }
-    'venv': {
-      class { 'jjb::install::venv':
-        install_via_source => $install_via_source,
-        package_version    => $package_version,
-        vcs_path           => $vcs_info['vcs_path'],
-        venv_path          => $venv_path,
-      }
-      if ($install_via_source) {
-        Class['jjb::install::vcs'] ->
-        Class['jjb::install::venv']
-      }
+  } else {
+    class { 'jjb::install::package':
+      package_name    => $package_name,
+      package_version => $package_version,
     }
-    default: { fail("Invalid \$install_type of ${install_type}") }
   }
 }
