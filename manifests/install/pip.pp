@@ -38,17 +38,20 @@ class jjb::install::pip (
   Pattern['^\/'] $vcs_path,
   Pattern['^\/'] $venv_path,
 ) {
-  # only set $_url if we're installing from source otherwise don't set it so we
-  # end up with the default undef
+  # only set $_url if we're installing from source
   if ($install_via_source) {
     $_url = $vcs_path
     $_subscribe = Vcsrepo[$vcs_path]
+  } else {
+    $_url = undef
+    $_subscribe = undef
   }
 
-  # only set $_venv if we're installing in a venv, otherwise don't set it so we
-  # end up with the default undef
+  # only set $_venv if we're installing in a venv
   if ($install_type == 'venv') {
     $_venv = $venv_path
+  } else {
+    $_venv = undef
   }
 
   python::pip { $package_name:
