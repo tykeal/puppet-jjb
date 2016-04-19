@@ -24,8 +24,9 @@ class jjb::params {
 
   $ini_dir   = '/etc/jenkins_jobs'
   $ini_file  = '/etc/jenkins_jobs/jenkins_jobs.ini'
-  $ini_owner = 'root'
   $ini_group = 'root'
+  $ini_mode  = '0440'
+  $ini_owner = 'root'
 
   $manage_ini_dir  = true
   $package_name    = 'jenkins-job-builder'

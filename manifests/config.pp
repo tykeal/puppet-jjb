@@ -24,24 +24,24 @@
 #
 # @param ini_file Fully qualified name of the ini configuration file
 #
-# @param ini_owner Owner of the ini configuration file
-#
 # @param ini_group Group owner of the ini configuration file
+#
+# @param ini_mode File mode for the ini configuration file
+#
+# @param ini_owner Owner of the ini configuration file
 #
 # @param manage_ini_dir If the ini_dir should be managed or not
 #
 class jjb::config (
   Hash $config,
-  String $ini_dir,
-  String $ini_file,
-  String $ini_owner,
-  String $ini_group,
+  Pattern['^\/'] $ini_dir,
+  Pattern['^\/'] $ini_file,
+  String[1] $ini_group,
+  Pattern['^\d{4}$'] $ini_mode,
+  String[1] $ini_owner,
   Boolean $manage_ini_dir,
 ) {
   include jjb::params
-
-  validate_absolute_path($ini_dir)
-  validate_absolute_path($ini_file)
 
   $_config = merge($jjb::params::default_config, $config)
 
@@ -55,7 +55,8 @@ class jjb::config (
 
   ini_config {$ini_file:
     config => $_config,
-    owner  => $ini_owner,
     group  => $ini_group,
+    mode   => $ini_mode,
+    owner  => $ini_owner,
   }
 }

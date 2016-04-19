@@ -5,8 +5,9 @@ describe 'jjb::config' do
       'config'         => {},
       'ini_dir'        => '/foo',
       'ini_file'       => '/foo/bar.ini',
-      'ini_owner'      => 'baz',
       'ini_group'      => 'biz',
+      'ini_mode'       => '0440',
+      'ini_owner'      => 'baz',
       'manage_ini_dir' => true,
     }
   }
