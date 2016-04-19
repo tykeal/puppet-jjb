@@ -18,7 +18,7 @@
 
 Installs and configures Jenkins Job Builder (JJB).
 
-Does *not* create JJB layouts. In all honesty that is better served out of
+Does **not** create JJB layouts. In all honesty that is better served out of
 separate repo that is either dedicated to it or to other CI related components
 and having jobs built into your CI to do validation and instantiation into your
 CI.
@@ -37,7 +37,7 @@ If installing into a virtualenv then please make sure that you instantiate
 [stankevich/python](https://forge.puppet.com/stankevich/python) in a way that
 installs the needed system components.
 
-*NOTE* The default of `stankevich/python` is to ensure that the python
+**NOTE** The default of `stankevich/python` is to ensure that the python
 development tools are absent but they are a requirement for python-virtualenv on
 RedHat family distributions.
 
@@ -84,9 +84,9 @@ ci-management](https://gerrit.zephyrproject.org/r/gitweb?p=ci-management.git;a=b
 
 ## Reference
 
-*Class:* `jjb`
+**Class:** `jjb`
 
-`config`
+**`config`**
 A configuration hash that defines how the jenkins_jobs.ini is created. Each
 section of the ini file is defined by it's own named subhash. At present JJB
 understands the following sections:
@@ -103,7 +103,7 @@ configuration. Outside of merging defaults in for the jenkins section it is
 passed unmodified. See the documentation of `tykeal/ini_config` for more
 details.
 
-*`install_type`*
+**`install_type`**
 Valid options are 'package', 'system', or 'venv' with a default of 'system'.
 
 This option determins how JJB will be installed.
@@ -118,39 +118,39 @@ not in all upstream repos you will need to make sure that the repo that you're
 installing from is already configured on the system should you choose to utilize
 this option.
 
-*`install_via_source`*
+**`install_via_source`**
 If true then a checkout of JJB will be made and utilized
 for installation into either the system or a venv. If `install_type` is
 'package' than this option is ignored. Defaults to false.
 
-*`ini_dir`*
+**`ini_dir`**
 The directory where the inifile should be created. Defaults to
 '/etc/jenkins_jobs'
 
-*`ini_file`*
+**`ini_file`**
 The configuration file that should be managed. Defaults to
 '/etc/jenkins_jobs/jenkins_jobs.ini'
 
-*`ini_group`*
+**`ini_group`**
 The owning group for the inifile. Defaults to 'root'
 
-*`ini_mode`*
+**`ini_mode`**
 The file mode for the inifile. Defaults to '0440'
 
-*`ini_owner`*
+**`ini_owner`**
 The owning user for the inifile. Defaults to 'root'
 
-*`manage_ini_dir`*
+**`manage_ini_dir`**
 If true then `ini_dir` will be created. Defaults to true
 
-*`package_name`*
+**`package_name`**
 The name of the package to install. Defaults to 'jenkins-job-builder'
 
-*`package_version`*
+**`package_version`**
 The version of the package to install. Defaults to 'present'. Other options are
 'absent', 'latest' or a specific version.
 
-*`vcs_info`*
+**`vcs_info`**
 A configuration hash for use if installing via source. The options are used to
 drive the configuration of a vcsrepo resource. The default hash is configured as
 follows. This hash is useful only if `install_via_source` is true
@@ -164,7 +164,7 @@ vcs_info = {
 }
 ```
 
-*`venv_path`*
+**`venv_path`**
 The path for the virtualenv if `install_type` is 'venv'. Defaults to
 '/opt/venv_jenkins_job_builder'
 
