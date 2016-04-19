@@ -75,8 +75,10 @@ system I would recommend looking at the following configurations:
 
 [OpenDaylight
 releng/builder](https://git.opendaylight.org/gerrit/gitweb?p=releng/builder.git;a=blob;f=jjb/releng-jobs.yaml;h=2adbc8d251e7cf13b65cd66a553f91f09ebd2d1f;hb=HEAD)
+
 [FD.io
 ci-management](https://gerrit.fd.io/r/gitweb?p=ci-management.git;a=blob;f=jjb/ci-management/ci-management-jobs.yaml;h=06bcb75ad8c11769d46b031b7bfced019566d99c;hb=HEAD)
+
 [Zephyr Projection
 ci-management](https://gerrit.zephyrproject.org/r/gitweb?p=ci-management.git;a=blob;f=jjb/ci-management-jobs.yaml;h=cd73102915ee4ae9869481ac9c0ab063253ea383;hb=HEAD)
 
@@ -101,7 +103,7 @@ configuration. Outside of merging defaults in for the jenkins section it is
 passed unmodified. See the documentation of `tykeal/ini_config` for more
 details.
 
-`install_type`
+*`install_type`*
 Valid options are 'package', 'system', or 'venv' with a default of 'system'.
 
 This option determins how JJB will be installed.
@@ -116,39 +118,39 @@ not in all upstream repos you will need to make sure that the repo that you're
 installing from is already configured on the system should you choose to utilize
 this option.
 
-`install_via_source`
+*`install_via_source`*
 If true then a checkout of JJB will be made and utilized
 for installation into either the system or a venv. If `install_type` is
 'package' than this option is ignored. Defaults to false.
 
-`ini_dir`
+*`ini_dir`*
 The directory where the inifile should be created. Defaults to
 '/etc/jenkins_jobs'
 
-`ini_file`
+*`ini_file`*
 The configuration file that should be managed. Defaults to
 '/etc/jenkins_jobs/jenkins_jobs.ini'
 
-`ini_group`
+*`ini_group`*
 The owning group for the inifile. Defaults to 'root'
 
-`ini_mode`
+*`ini_mode`*
 The file mode for the inifile. Defaults to '0440'
 
-`ini_owner`
+*`ini_owner`*
 The owning user for the inifile. Defaults to 'root'
 
-`manage_ini_dir`
+*`manage_ini_dir`*
 If true then `ini_dir` will be created. Defaults to true
 
-`package_name`
+*`package_name`*
 The name of the package to install. Defaults to 'jenkins-job-builder'
 
-`package_version`
+*`package_version`*
 The version of the package to install. Defaults to 'present'. Other options are
 'absent', 'latest' or a specific version.
 
-`vcs_info`
+*`vcs_info`*
 A configuration hash for use if installing via source. The options are used to
 drive the configuration of a vcsrepo resource. The default hash is configured as
 follows. This hash is useful only if `install_via_source` is true
@@ -162,7 +164,7 @@ vcs_info = {
 }
 ```
 
-`venv_path`
+*`venv_path`*
 The path for the virtualenv if `install_type` is 'venv'. Defaults to
 '/opt/venv_jenkins_job_builder'
 
