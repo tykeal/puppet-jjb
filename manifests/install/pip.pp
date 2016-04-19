@@ -49,6 +49,9 @@ class jjb::install::pip (
 
   # only set $_venv if we're installing in a venv
   if ($install_type == 'venv') {
+    python::virtualenv { $venv_path:
+      before => Python::Pip[$package_name],
+    }
     $_venv = $venv_path
   } else {
     $_venv = undef

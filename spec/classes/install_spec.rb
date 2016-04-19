@@ -1,8 +1,16 @@
 require 'spec_helper'
 describe 'jjb::install' do
+  let(:facts) { {
+    :fqdn                   => 'my.test.com',
+    :ipaddress              => '10.0.0.1',
+    :osfamily               => 'RedHat',
+    :operatingsystem        => 'CentOS',
+    :operatingsystemrelease => '7',
+  } }
 
-  on_supported_os.each do |os, facts|
-    context "on #{os} with standard defaults for all parameters on" do
+  #on_supported_os.each do |os, facts|
+    context 'with standard defaults for all parameters' do
+    #context "on #{os} with standard defaults for all parameters on" do
       let(:params) {
         {
           'install_type'       => 'venv',
@@ -69,7 +77,7 @@ describe 'jjb::install' do
         is_expected.to_not contain_class('jjb::install::vcs')
       end
     end
-  end
+  #end
 end
 
 # vi: ts=2 sw=2 sts=2 et :
