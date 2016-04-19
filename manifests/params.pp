@@ -19,7 +19,7 @@
 # Apache-2.0 <http://spdx.org/licenses/Apache-2.0>
 #
 class jjb::params {
-  $install_type       = 'venv'
+  $install_type       = 'system'
   $install_via_source = false
 
   $ini_dir   = '/etc/jenkins_jobs'
