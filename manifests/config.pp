@@ -54,10 +54,11 @@ class jjb::config (
   }
 
   ini_config {$ini_file:
-    config    => $_config,
-    group     => $ini_group,
-    mode      => $ini_mode,
-    owner     => $ini_owner,
-    show_diff => false,
+    config        => $_config,
+    group         => $ini_group,
+    indentoptions => false,
+    mode          => $ini_mode,
+    owner         => $ini_owner,
+    show_diff     => false,
   }
 }
