@@ -37,8 +37,9 @@ describe 'jjb::config' do
             'url'      => 'https://localhost:8080',
           },
         },
-        :owner  => params['ini_owner'],
-        :group  => params['ini_group'],
+        :owner     => params['ini_owner'],
+        :group     => params['ini_group'],
+        :show_diff => false,
       ) }
 
       it 'should have a merged config' do
