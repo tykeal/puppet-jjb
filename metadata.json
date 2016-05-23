@@ -1,6 +1,6 @@
 {
   "name": "tykeal-jjb",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": "tykeal",
   "summary": "Management for OpenStack's Jenkins Job Builder",
   "license": "Apache-2.0",
@@ -22,7 +22,7 @@
     },
     {
       "name": "tykeal-ini_config",
-      "version_requirement": ">=1.0.0 <2.0.0"
+      "version_requirement": ">=1.1.0 <2.0.0"
     }
   ],
   "operatingsystem_support": [
